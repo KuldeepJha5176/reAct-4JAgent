@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+/* Class-based dark mode */
+@variant dark (&:where(.dark, .dark *));
+
+/* Tailwind theme — references CSS variables so they update at runtime */
+@theme {
+  --color-apple-bg: var(--apple-bg);
+  --color-apple-card: var(--apple-card);
+  --color-apple-fill2: var(--apple-fill2);
+  --color-apple-fill3: var(--apple-fill3);
+  --color-apple-fill4: var(--apple-fill4);
+  --color-apple-text: var(--apple-text);
+  --color-apple-secondary: var(--apple-secondary);
+  --color-apple-tertiary: var(--apple-tertiary);
+  --color-apple-accent: var(--apple-accent);
+  --color-apple-danger: var(--apple-danger);
+  --color-apple-border: var(--apple-border);
+
+  --font-sans: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --radius-apple: 12px;
+  --radius-input: 8px;
+  --radius-pill: 20px;
+}
+
+/* Light mode tokens */
+:root {
+  --apple-bg: #f5f5f7;
+  --apple-card: #ffffff;
+  --apple-fill2: #fafafc;
+  --apple-fill3: #f5f5f7;
+  --apple-fill4: #e8e8ed;
+  --apple-text: #1d1d1f;
+  --apple-secondary: #6e6e73;
+  --apple-tertiary: #86868b;
+  --apple-accent: #0071e3;
+  --apple-danger: #e30000;
+  --apple-border: rgba(0, 0, 0, 0.08);
+  --apple-scrollbar: rgba(0, 0, 0, 0.16);
+  --apple-scrollbar-hover: rgba(0, 0, 0, 0.28);
+  --apple-modal-backdrop: rgba(0, 0, 0, 0.3);
+  --apple-danger-tint: #fff2f4;
+}
+
+/* Dark mode tokens */
+:root.dark {
+  --apple-bg: #000000;
+  --apple-card: #1c1c1e;
+  --apple-fill2: #2c2c2e;
+  --apple-fill3: #3a3a3c;
+  --apple-fill4: #48484a;
+  --apple-text: #f5f5f7;
+  --apple-secondary: #aeaeb2;
+  --apple-tertiary: #636366;
+  --apple-accent: #0a84ff;
+  --apple-danger: #ff453a;
+  --apple-border: rgba(255, 255, 255, 0.1);
+  --apple-scrollbar: rgba(255, 255, 255, 0.16);
+  --apple-scrollbar-hover: rgba(255, 255, 255, 0.28);
+  --apple-modal-backdrop: rgba(0, 0, 0, 0.6);
+  --apple-danger-tint: #3d1417;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--apple-bg);
+  color: var(--apple-text);
+  font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.4705882353;
+  font-weight: 400;
+  letter-spacing: -0.022em;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  min-width: 1024px;
+  overflow: hidden;
+}
+
+/* Thin scrollbar */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: var(--apple-scrollbar);
+  border-radius: 2px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: var(--apple-scrollbar-hover);
+}
+
+/* Thinking animation */
+@keyframes thinking-dot {
+  0%, 80%, 100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.thinking-dot {
+  animation: thinking-dot 1.4s ease-in-out infinite;
+}
+.thinking-dot:nth-child(2) { animation-delay: 0.16s; }
+.thinking-dot:nth-child(3) { animation-delay: 0.32s; }

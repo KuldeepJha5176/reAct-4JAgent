@@ -1,0 +1,20 @@
+spring.application.name=CrudLang
+
+# PostgreSQL DataSource — copy this file to application.properties and fill in your values
+spring.datasource.url=${DB_URL:jdbc:postgresql://localhost:5432/demo}
+spring.datasource.username=${DB_USER:postgres}
+spring.datasource.password=${DB_PASSWORD:your_password_here}
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+# JPA / Hibernate
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=false
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+
+# Gemini Agent
+agent.gemini.api-key=${GEMINI_API_KEY:your_gemini_api_key_here}
+agent.gemini.model-name=${GEMINI_MODEL:gemini-2.0-flash-lite}
+agent.gemini.temperature=0.7
+
+# Base URL for agent tools (unused — tools call service directly now)
+agent.student.api.base-url=http://localhost:8080
