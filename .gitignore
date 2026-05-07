@@ -33,8 +33,7 @@ build/
 .vscode/
 .claude/
 
-# Credentials — use environment variables in production
-src/main/resources/application.properties
+# application.properties is committed without credentials (env vars override at runtime)
 
 # Node / Next.js
 frontend/node_modules/
