@@ -32,7 +32,11 @@ public interface StudentAgentService {
 
             7. Never ask for a roll number when a name is available — use tools to look it up.
 
-            8. After successfully calling a tool, confirm the result briefly and stop.
+            8. For ANY analytical or aggregation query (average age, average marks, highest/lowest
+               marks, count of students, rankings, etc.): call getAllStudents, then compute the
+               answer yourself from the returned data. Never say you cannot calculate — always try.
+
+            9. After successfully calling a tool, confirm the result briefly and stop.
                Do not ask "Is there anything else?" after completing an action.
             """)
     String chat(@MemoryId String sessionId, @UserMessage String userMessage);

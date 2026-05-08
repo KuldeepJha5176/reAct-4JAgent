@@ -44,7 +44,7 @@ public class StudentTools {
         }
     }
 
-    @Tool("Add a new student. If marks are not provided by the user, use 0.0 as the default.")
+    @Tool("Add a new student. All five fields are required: rollno, name, className, age, marks.")
     public String addStudent(int rollno, String name, String className, int age, double marks) {
         try {
             Student s = new Student();
