@@ -68,7 +68,7 @@ public class AgentConfig {
             ChatModel model = switch (modelId) {
                 case "gemini-2.0-flash-lite" -> buildGemini("gemini-2.0-flash-lite");
                 case "llama-3.3-70b-versatile" -> buildGroq("llama-3.3-70b-versatile");
-                case "mixtral-8x7b-32768" -> buildGroq("mixtral-8x7b-32768");
+                case "gemma2-9b-it" -> buildGroq("gemma2-9b-it");
                 default -> buildGemini("gemini-2.5-flash-lite");
             };
             return AiServices.builder(StudentAgentService.class)

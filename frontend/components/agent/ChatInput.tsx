@@ -9,7 +9,7 @@ const MODELS = [
   { id: "gemini-2.5-flash-lite", label: "Gemini 2.5 Flash Lite" },
   { id: "gemini-2.0-flash-lite", label: "Gemini 2.0 Flash Lite" },
   { id: "llama-3.3-70b-versatile", label: "Llama 3.3 70B (Groq)" },
-  { id: "mixtral-8x7b-32768", label: "Mixtral 8x7B (Groq)" },
+  { id: "gemma2-9b-it", label: "Gemma 2 9B (Groq)" },
 ];
 
 interface ChatInputProps {
