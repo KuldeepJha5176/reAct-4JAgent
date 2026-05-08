@@ -14,6 +14,8 @@ export default function AgentPage() {
     activeSessionId,
     pendingMessage,
     newMessageIds,
+    selectedModel,
+    setSelectedModel,
     newSession,
     selectSession,
     deleteSession,
@@ -43,7 +45,12 @@ export default function AgentPage() {
           ) : (
             <EmptyChat onPrompt={sendMessage} />
           )}
-          <ChatInput onSend={sendMessage} disabled={pendingMessage} />
+          <ChatInput
+            onSend={sendMessage}
+            disabled={pendingMessage}
+            selectedModel={selectedModel}
+            onModelChange={setSelectedModel}
+          />
         </div>
       </div>
     </div>

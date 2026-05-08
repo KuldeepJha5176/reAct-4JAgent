@@ -6,6 +6,7 @@ import { askAgent } from "@/lib/api/agent";
 import { generateId, truncate } from "@/lib/utils";
 
 const STORAGE_KEY = "crudlang_chat_sessions";
+const DEFAULT_MODEL = "gemini-2.5-flash-lite";
 
 function loadSessions(): ChatSession[] {
   if (typeof window === "undefined") return [];
@@ -29,6 +30,7 @@ export function useChat() {
   const [pendingMessage, setPendingMessage] = useState(false);
   const [newMessageIds, setNewMessageIds] = useState<Set<string>>(new Set());
   const [mounted, setMounted] = useState(false);
+  const [selectedModel, setSelectedModel] = useState(DEFAULT_MODEL);
 
   useEffect(() => {
     const stored = loadSessions();
@@ -81,6 +83,7 @@ export function useChat() {
           title: truncate(question, 40),
           messages: [],
           createdAt: Date.now(),
+          modelId: selectedModel,
         };
         setSessions((prev) => [session, ...prev]);
         setActiveSessionId(session.id);
@@ -108,7 +111,7 @@ export function useChat() {
 
       setPendingMessage(true);
       try {
-        const { answer } = await askAgent(question, targetId);
+        const { answer } = await askAgent(question, targetId, selectedModel);
         const aiMsg: Message = {
           id: generateId(),
           role: "ai",
@@ -144,7 +147,7 @@ export function useChat() {
         setPendingMessage(false);
       }
     },
-    [activeSessionId, pendingMessage]
+    [activeSessionId, pendingMessage, selectedModel]
   );
 
   const clearNewMessageId = useCallback((id: string) => {
@@ -163,6 +166,8 @@ export function useChat() {
     activeSessionId,
     pendingMessage,
     newMessageIds,
+    selectedModel,
+    setSelectedModel,
     newSession,
     selectSession,
     deleteSession,

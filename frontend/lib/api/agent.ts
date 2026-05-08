@@ -2,12 +2,13 @@ import { apiFetch } from "./client";
 
 export async function askAgent(
   question: string,
-  sessionId: string
+  sessionId: string,
+  modelId?: string
 ): Promise<{ answer: string }> {
   const res = await fetch("/api/agent/ask", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ question, sessionId }),
+    body: JSON.stringify({ question, sessionId, modelId }),
   });
 
   const data = await res.json();

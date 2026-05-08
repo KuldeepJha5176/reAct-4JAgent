@@ -5,12 +5,21 @@ import { motion } from "framer-motion";
 import { PaperPlaneTilt } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 
+const MODELS = [
+  { id: "gemini-2.5-flash-lite", label: "Gemini 2.5 Flash Lite" },
+  { id: "gemini-2.0-flash-lite", label: "Gemini 2.0 Flash Lite" },
+  { id: "llama-3.3-70b-versatile", label: "Llama 3.3 70B (Groq)" },
+  { id: "mixtral-8x7b-32768", label: "Mixtral 8x7B (Groq)" },
+];
+
 interface ChatInputProps {
   onSend: (message: string) => void;
   disabled?: boolean;
+  selectedModel: string;
+  onModelChange: (modelId: string) => void;
 }
 
-export function ChatInput({ onSend, disabled }: ChatInputProps) {
+export function ChatInput({ onSend, disabled, selectedModel, onModelChange }: ChatInputProps) {
   const [value, setValue] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -18,7 +27,7 @@ export function ChatInput({ onSend, disabled }: ChatInputProps) {
     const el = textareaRef.current;
     if (!el) return;
     el.style.height = "auto";
-    const maxHeight = 6 * 28; // ~6 rows
+    const maxHeight = 6 * 28;
     el.style.height = `${Math.min(el.scrollHeight, maxHeight)}px`;
   }
 
@@ -41,7 +50,27 @@ export function ChatInput({ onSend, disabled }: ChatInputProps) {
 
   return (
     <div className="border-t border-apple-border bg-apple-card px-6 py-4">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl mx-auto space-y-2">
+        <div className="flex items-center gap-2">
+          <label className="text-[12px] text-apple-secondary whitespace-nowrap">Model:</label>
+          <select
+            value={selectedModel}
+            onChange={(e) => onModelChange(e.target.value)}
+            disabled={disabled}
+            className={cn(
+              "text-[12px] rounded-[8px] border border-apple-border bg-apple-fill px-2.5 py-1",
+              "text-apple-text outline-none cursor-pointer",
+              "focus:border-apple-accent focus:ring-1 focus:ring-apple-accent/20",
+              "transition-colors duration-150",
+              disabled && "opacity-50 cursor-not-allowed"
+            )}
+          >
+            {MODELS.map((m) => (
+              <option key={m.id} value={m.id}>{m.label}</option>
+            ))}
+          </select>
+        </div>
+
         <div
           className={cn(
             "flex items-end gap-3 rounded-[14px] border bg-apple-card px-4 py-3",
@@ -84,7 +113,7 @@ export function ChatInput({ onSend, disabled }: ChatInputProps) {
             <PaperPlaneTilt size={17} weight="fill" />
           </motion.button>
         </div>
-        <p className="mt-2 text-center text-[11px] text-apple-tertiary">
+        <p className="text-center text-[11px] text-apple-tertiary">
           Press Enter to send · Shift+Enter for a new line
         </p>
       </div>

@@ -28,6 +28,7 @@ export interface ChatSession {
   title: string;
   messages: Message[];
   createdAt: number;
+  modelId?: string;
 }
 
 export class ApiError extends Error {
